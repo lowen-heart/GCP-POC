@@ -1,6 +1,7 @@
 steps:
 - name: 'gcr.io/cloud-builders/mvn'
-  args: ['install','-f','spring-boot-gcp-poc/pom.xml','-DskipTests']
+  args: ['install','-DskipTests']
+  dir: 'spring-boot-gcp-poc'
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/gcp-test', '.']
   dir: 'spring-boot-gcp-poc'
