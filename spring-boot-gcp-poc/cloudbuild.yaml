@@ -12,7 +12,7 @@ steps:
   - 'set'
   - 'image'
   - 'deployment'
-  - 'gcp-test-deployment'
+  - 'gcp-test-container'
   - 'gcp-test-container=gcr.io/$PROJECT_ID/gcp-test:$TAG_NAME'
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-east4-b'
