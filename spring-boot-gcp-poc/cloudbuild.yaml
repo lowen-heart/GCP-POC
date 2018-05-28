@@ -5,5 +5,15 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/gcp-test:$TAG_NAME', '.']
   dir: 'spring-boot-gcp-poc'
-images: ['gcr.io/$PROJECT_ID/gcp-test:$TAG_NAME']
+- name: 'gcr.io/cloud-builders/kubectl'
+  args:
+  - set
+  - image
+  - deployment
+  - gcp-test-deployment
+  - gcp-test-container=gcr.io/$PROJECT_ID/gcp-test:$TAG_NAME
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-east4-b'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=gcp-test-cluster'
+ images: ['gcr.io/$PROJECT_ID/gcp-test:$TAG_NAME']
 
