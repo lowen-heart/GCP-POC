@@ -1,19 +1,32 @@
 steps:
+  #build the application with Maven and skip tests
 - name: 'gcr.io/cloud-builders/mvn'
-  args: ['install','-DskipTests']
+  args: 
+   - 'install'
+   - '-DskipTests'
   dir: 'spring-boot-gcp-poc'
+  
+  #build docker containe
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/gcp-test:$TAG_NAME', '.']
+  args: 
+    - 'build'
+    - '-t'
+    - 'gcr.io/$PROJECT_ID/gcp-test:$TAG_NAME'
+    - '.'
   dir: 'spring-boot-gcp-poc'
+  
+  #push container to Container Repository
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/$PROJECT_ID/gcp-test:$TAG_NAME']
+  args: 
+    - 'push'
+    - 'gcr.io/$PROJECT_ID/gcp-test:$TAG_NAME'
+    
+  #use kubernetes to deploy the solution
 - name: 'gcr.io/cloud-builders/kubectl'
   args:
-  - 'set'
-  - 'image'
-  - 'deployment'
-  - 'gcp-test-container'
-  - 'gcp-test-container=gcr.io/$PROJECT_ID/gcp-test:$TAG_NAME'
+  - 'run'
+  - 'gcp-test-deployment'
+  - '--image==gcr.io/$PROJECT_ID/gcp-test:$TAG_NAME'
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-east4-b'
   - 'CLOUDSDK_CONTAINER_CLUSTER=gcp-test-cluster'
