@@ -16,9 +16,10 @@ steps:
   dir: 'spring-boot-gcp-poc'
   
   #push container to Container Repository
-- name: 'gcr.io/cloud-builders/docker'
-  args: 
-    - 'push'
+#- name: 'gcr.io/cloud-builders/docker'
+#  args: 
+#    - 'push'
+- images:
     - 'gcr.io/$PROJECT_ID/gcp-test:$TAG_NAME'
     
   #use kubernetes to deploy the solution
