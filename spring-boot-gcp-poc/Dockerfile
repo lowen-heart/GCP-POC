@@ -1,4 +1,4 @@
-FROM alpine:8_jdk
+FROM openjdk:8-jre-alpine
 ARG JAR_FILE
 COPY ${JAR_FILE} spring-gcp-poc-0.1.0.jar
 EXPOSE 8080
