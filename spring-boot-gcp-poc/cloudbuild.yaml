@@ -22,13 +22,13 @@ steps:
     - 'gcr.io/$PROJECT_ID/gcp-test:$TAG_NAME'
     
   #use kubernetes to deploy the solution
-- name: 'gcr.io/cloud-builders/kubectl'
-  args:
-  - 'run'
-  - 'gcp-test-deployment'
-  - '--image=gcr.io/$PROJECT_ID/gcp-test:$TAG_NAME'
-  env:
-  - 'CLOUDSDK_COMPUTE_ZONE=us-east4-b'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=gcp-test-cluster'
+- #name: 'gcr.io/cloud-builders/kubectl'
+  #args:
+  #- 'run'
+  #- 'gcp-test-deployment'
+  #- '--image=gcr.io/$PROJECT_ID/gcp-test:$TAG_NAME'
+  #env:
+  #- 'CLOUDSDK_COMPUTE_ZONE=us-east4-b'
+  #- 'CLOUDSDK_CONTAINER_CLUSTER=gcp-test-cluster'
 
 
